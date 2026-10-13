@@ -1,10 +1,13 @@
 # 🧵 Textile Store Management System (TEXPRO ERP & POS)
 
+[![Vercel Deployment](https://img.shields.io/badge/Vercel-Live%20Deployment-black?style=flat&logo=vercel)](https://textile-store-management-system.vercel.app)
 [![Node.js](https://img.shields.io/badge/Node.js-v20+-green.svg)](https://nodejs.org/)
 [![Express](https://img.shields.io/badge/Express-5.x-blue.svg)](https://expressjs.com/)
 [![SQLite](https://img.shields.io/badge/SQLite-WAL%20Mode-003B57.svg)](https://www.sqlite.org/)
 [![License](https://img.shields.io/badge/License-MIT-purple.svg)](LICENSE)
 [![Tests](https://img.shields.io/badge/Tests-17%20Passed%20%2F%200%20Failed-success.svg)]()
+
+🌐 **Live Production App**: **[https://textile-store-management-system.vercel.app](https://textile-store-management-system.vercel.app)**
 
 > A high-performance, enterprise-grade Textile Store Management System engineered with a **Third Normal Form (3NF) relational database schema**, an **ACID-compliant inventory & POS billing engine**, and an interactive **SQL Analytics Workbench** executing complex relational queries with Common Table Expressions (CTEs) and Window Functions.
 

@@ -39,6 +39,34 @@ app.get('/api/health', (req, res) => {
     });
 });
 
+let isDbInitialized = false;
+let initPromise = null;
+
+function ensureDb() {
+    if (!initPromise) {
+        initPromise = initializeDatabase()
+            .then(() => { isDbInitialized = true; })
+            .catch((err) => {
+                initPromise = null;
+                throw err;
+            });
+    }
+    return initPromise;
+}
+
+// Ensure DB is initialized before handling API requests (critical for Vercel Serverless)
+app.use(async (req, res, next) => {
+    if (!isDbInitialized && req.path.startsWith('/api')) {
+        try {
+            await ensureDb();
+        } catch (err) {
+            console.error('Failed to initialize database on request:', err);
+            return res.status(500).json({ success: false, message: 'Database initialization error: ' + err.message });
+        }
+    }
+    next();
+});
+
 // API Routes
 app.use('/api/products', productRoutes);
 app.use('/api/customers', customerRoutes);

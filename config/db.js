@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 const fs = require('fs');
 
-const DB_PATH = process.env.DB_PATH || path.join(__dirname, '..', 'textile.db');
+const DB_PATH = process.env.DB_PATH || (process.env.VERCEL ? path.join('/tmp', 'textile.db') : path.join(__dirname, '..', 'textile.db'));
 
 // Ensure data directory exists
 const dbDir = path.dirname(DB_PATH);
