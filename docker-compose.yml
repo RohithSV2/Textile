@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  textile-erp:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: textile-erp:latest
+    container_name: textile_management_system
+    restart: always
+    ports:
+      - "5000:5000"
+    environment:
+      - NODE_ENV=production
+      - PORT=5000
+    volumes:
+      - textile_data:/app/data
+    healthcheck:
+      test: ["CMD", "wget", "--spider", "-q", "http://localhost:5000/api/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+
+volumes:
+  textile_data:
+    driver: local

@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: textile-store-erp
+    env: node
+    plan: free
+    buildCommand: npm install && node db/initDb.js
+    startCommand: npm start
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: PORT
+        value: 10000
+    healthCheckPath: /api/health

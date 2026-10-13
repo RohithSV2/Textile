@@ -1,0 +1,30 @@
+{
+  "name": "textile-store-management-system",
+  "version": "1.0.0",
+  "description": "High & Pro Level Textile Store Management System with Normalized Relational Database, Full CRUD Billing & Inventory, Complex SQL Analytics, and Responsive POS Frontend",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "seed": "node db/initDb.js --force",
+    "test": "node tests/api.test.js"
+  },
+  "keywords": [
+    "textile",
+    "fabric-inventory",
+    "pos-billing",
+    "sql-analytics",
+    "retail-erp",
+    "sqlite",
+    "express"
+  ],
+  "author": "Antigravity Engineering",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.6",
+    "dotenv": "^18.0.7",
+    "express": "^5.3.0",
+    "morgan": "^1.12.1",
+    "sqlite3": "^6.0.1"
+  }
+}

@@ -1,0 +1,1063 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Textile Store Management System | Enterprise ERP & POS</title>
+    <!-- Modern Font: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chart.js for Financial & Stock Visualizations -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/pos.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="brand-icon">
+                    <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.042A8.967 8.967 0 006 3.75c-1.052 0-2.062.18-3 .512v14.25A8.987 8.987 0 016 18c2.305 0 4.408.867 6 2.292m0-14.25a8.966 8.966 0 016-2.292c1.052 0 2.062.18 3 .512v14.25A8.987 8.987 0 0018 18a8.967 8.967 0 00-6 2.292m0-14.25v14.25" />
+                    </svg>
+                </div>
+                <div>
+                    <div class="brand-title">TEXPRO ERP</div>
+                    <div class="brand-subtitle">Textile Management</div>
+                </div>
+            </div>
+
+            <nav class="sidebar-nav">
+                <div class="nav-section-title">Core Operations</div>
+                <button class="nav-item active" data-view="dashboard">
+                    <svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6A2.25 2.25 0 016 3.75h2.25A2.25 2.25 0 0110.5 6v2.25a2.25 2.25 0 01-2.25 2.25H6a2.25 2.25 0 01-2.25-2.25V6zM3.75 15.75A2.25 2.25 0 016 13.5h2.25a2.25 2.25 0 012.25 2.25V18a2.25 2.25 0 01-2.25 2.25H6A2.25 2.25 0 013.75 18v-2.25zM13.5 6a2.25 2.25 0 012.25-2.25H18A2.25 2.25 0 0120.25 6v2.25A2.25 2.25 0 0118 10.5h-2.25a2.25 2.25 0 01-2.25-2.25V6zM13.5 15.75a2.25 2.25 0 012.25-2.25H18a2.25 2.25 0 012.25 2.25V18A2.25 2.25 0 0118 20.25h-2.25A2.25 2.25 0 0113.5 18v-2.25z"/></svg>
+                    <span>Dashboard</span>
+                </button>
+                <button class="nav-item" data-view="pos">
+                    <svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18.75a60.07 60.07 0 0115.797 2.101c.727.198 1.453-.342 1.453-1.096V18.75M3.75 4.5v.75A.75.75 0 013 6H2.25m0 0H3m-1.5 0h.008v.008H1.5V6zm0 4.5h.008v.008H1.5v-.008zm0 4.5h.008v.008H1.5V15zm19.5-9h.008v.008H21V6zm0 4.5h.008v.008H21v-.008zm0 4.5h.008v.008H21V15zm-4.5 3.75h.008v.008H16.5v-.008zm0-4.5h.008v.008H16.5v-.008zm0-4.5h.008v.008H16.5V6zm-4.5 12h.008v.008H12v-.008zm0-4.5h.008v.008H12v-.008zm0-4.5h.008v.008H12V6zM7.5 18h.008v.008H7.5V18zm0-4.5h.008v.008H7.5v-.008zm0-4.5h.008v.008H7.5V6z"/></svg>
+                    <span>POS Terminal (F2)</span>
+                </button>
+                <button class="nav-item" data-view="inventory">
+                    <svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
+                    <span>Inventory & Rolls</span>
+                </button>
+                <button class="nav-item" data-view="billing">
+                    <svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 00-3.375-3.375h-1.5A1.125 1.125 0 0113.5 7.125v-1.5a3.375 3.375 0 00-3.375-3.375H8.25m0 12.75h7.5m-7.5 3H12M10.5 2.25H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 00-9-9z"/></svg>
+                    <span>Invoices & Bills</span>
+                </button>
+
+                <div class="nav-section-title">Relationships</div>
+                <button class="nav-item" data-view="customers">
+                    <svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/></svg>
+                    <span>Customers & Khata</span>
+                </button>
+                <button class="nav-item" data-view="suppliers">
+                    <svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M8.25 18.75a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h6m-9 0H3.375a1.125 1.125 0 01-1.125-1.125V14.25m17.25 4.5a1.5 1.5 0 01-3 0m3 0a1.5 1.5 0 00-3 0m3 0h1.125c.621 0 1.129-.504 1.09-1.124a17.902 17.902 0 00-3.213-9.193 2.056 2.056 0 00-1.58-.86H14.25M16.5 18.75h-2.25m0-11.25H6.75a2.25 2.25 0 00-2.25 2.25v7.5m12-9.75V3.75a1.5 1.5 0 00-1.5-1.5H9.75a1.5 1.5 0 00-1.5 1.5v3.75"/></svg>
+                    <span>Suppliers & GRN</span>
+                </button>
+
+                <div class="nav-section-title">Database Analytics</div>
+                <button class="nav-item" data-view="analytics">
+                    <svg class="icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13.125C3 12.504 3.504 12 4.125 12h2.25c.621 0 1.125.504 1.125 1.125v6.75C7.5 20.496 6.996 21 6.375 21h-2.25A1.125 1.125 0 013 19.875v-6.75zM9.75 8.625c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v11.25c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V8.625zM16.5 4.125c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125v15.75c0 .621-.504 1.125-1.125 1.125h-2.25a1.125 1.125 0 01-1.125-1.125V4.125z"/></svg>
+                    <span>SQL Workbench</span>
+                </button>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="status-indicator"></div>
+                <div>
+                    <div><strong>SQLite Engine</strong></div>
+                    <div style="color: #64748b; font-size: 0.72rem;">WAL Mode • Foreign Keys Active</div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Wrapper -->
+        <div class="main-wrapper">
+            <!-- Top Header -->
+            <header class="top-header">
+                <div class="header-left">
+                    <h1 class="page-title" id="current-page-title">Executive Overview</h1>
+                </div>
+                <div class="header-right">
+                    <div class="store-badge">
+                        <span>🏬 Vogue Textiles (Main Showroom)</span>
+                    </div>
+                    <button class="btn-header-pos" id="btn-header-pos">
+                        <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15"/></svg>
+                        <span>New POS Bill (F2)</span>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Main Content Area -->
+            <main class="content-area">
+
+                <!-- ============================================================
+                     1. DASHBOARD VIEW
+                     ============================================================ -->
+                <section class="view-section active" id="view-dashboard">
+                    <!-- Urgent Alert Banner -->
+                    <div class="alert-banner" id="dashboard-alert-banner" style="display:none;">
+                        <div class="alert-banner-left">
+                            <span style="font-size: 1.2rem;">⚠️</span>
+                            <span id="alert-banner-text">Low stock warning</span>
+                        </div>
+                        <button class="btn btn-secondary btn-sm" onclick="App.navigateTo('inventory')">View Inventory</button>
+                    </div>
+
+                    <!-- 5 KPI Cards Grid -->
+                    <div class="grid-cards-5">
+                        <div class="kpi-card indigo">
+                            <div class="kpi-header">
+                                <span class="kpi-title">Today's Sales</span>
+                                <div class="kpi-icon-wrap">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="kpi-today-sales">₹0.00</div>
+                            <div class="kpi-meta" id="kpi-today-orders">0 orders today</div>
+                        </div>
+
+                        <div class="kpi-card emerald">
+                            <div class="kpi-header">
+                                <span class="kpi-title">Inventory Valuation</span>
+                                <div class="kpi-icon-wrap">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M20.25 7.5l-.625 10.632a2.25 2.25 0 01-2.247 2.118H6.622a2.25 2.25 0 01-2.247-2.118L3.75 7.5M10 11.25h4M3.375 7.5h17.25c.621 0 1.125-.504 1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125H3.375c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125z"/></svg>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="kpi-inventory-val">₹0.00</div>
+                            <div class="kpi-meta" id="kpi-active-rolls">0 fabric rolls in racks</div>
+                        </div>
+
+                        <div class="kpi-card rose">
+                            <div class="kpi-header">
+                                <span class="kpi-title">Low Stock Alerts</span>
+                                <div class="kpi-icon-wrap">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/></svg>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="kpi-low-stock">0</div>
+                            <div class="kpi-meta">Below min threshold</div>
+                        </div>
+
+                        <div class="kpi-card amber">
+                            <div class="kpi-header">
+                                <span class="kpi-title">Khata Receivables</span>
+                                <div class="kpi-icon-wrap">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="kpi-receivables">₹0.00</div>
+                            <div class="kpi-meta">Total credit balances</div>
+                        </div>
+
+                        <div class="kpi-card sky">
+                            <div class="kpi-header">
+                                <span class="kpi-title">Gross Margin Profit</span>
+                                <div class="kpi-icon-wrap">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M2.25 18L9 11.25l4.306 4.307a11.95 11.95 0 015.814-5.519l2.74-1.22m0 0l-5.94-2.28m5.94 2.28l-2.28 5.941"/></svg>
+                                </div>
+                            </div>
+                            <div class="kpi-value" id="kpi-gross-profit">₹0.00</div>
+                            <div class="kpi-meta">Lifetime billing markup</div>
+                        </div>
+                    </div>
+
+                    <!-- Charts Grid -->
+                    <div class="charts-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <div>
+                                    <div class="card-title">Daily Sales Trajectory</div>
+                                    <div class="card-subtitle">Revenue trend across past 14 billing days</div>
+                                </div>
+                            </div>
+                            <div style="height: 280px; position: relative;">
+                                <canvas id="chart-sales-trend"></canvas>
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header">
+                                <div>
+                                    <div class="card-title">Fabric Category Share</div>
+                                    <div class="card-subtitle">Inventory asset distribution</div>
+                                </div>
+                            </div>
+                            <div style="height: 280px; position: relative;">
+                                <canvas id="chart-category-dist"></canvas>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recent Sales Activity -->
+                    <div class="card">
+                        <div class="card-header">
+                            <div>
+                                <div class="card-title">Recent Billing Transactions</div>
+                                <div class="card-subtitle">Live point-of-sale invoice stream</div>
+                            </div>
+                            <button class="btn btn-secondary btn-sm" onclick="App.navigateTo('billing')">View All Invoices</button>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Invoice #</th>
+                                        <th>Date & Time</th>
+                                        <th>Customer</th>
+                                        <th>Amount</th>
+                                        <th>Payment</th>
+                                        <th>Status</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="dashboard-recent-sales-tbody">
+                                    <!-- Populated via JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================================
+                     2. POS BILLING TERMINAL VIEW
+                     ============================================================ -->
+                <section class="view-section" id="view-pos">
+                    <div class="pos-wrapper">
+                        <!-- Left Catalog Panel -->
+                        <div class="pos-catalog-panel">
+                            <!-- Search & Barcode Bar -->
+                            <div class="pos-search-bar">
+                                <div class="pos-search-input-wrap">
+                                    <svg class="icon" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+                                    <input type="text" id="pos-search-input" placeholder="Search fabric, SKU, color or scan Barcode (Press F2)..." autofocus>
+                                </div>
+                            </div>
+
+                            <!-- Category Filter Pills -->
+                            <div class="category-pills">
+                                <button class="cat-pill active" data-cat="ALL">All Categories</button>
+                                <button class="cat-pill" data-cat="1">Cotton & Cambric</button>
+                                <button class="cat-pill" data-cat="2">Pure Silks</button>
+                                <button class="cat-pill" data-cat="3">Suiting & Shirting</button>
+                                <button class="cat-pill" data-cat="4">Linens</button>
+                                <button class="cat-pill" data-cat="5">Georgettes</button>
+                                <button class="cat-pill" data-cat="6">Velvets</button>
+                                <button class="cat-pill" data-cat="7">Denims</button>
+                                <button class="cat-pill" data-cat="8">Ethnic & Sarees</button>
+                            </div>
+
+                            <!-- Product Cards Grid -->
+                            <div class="pos-product-grid" id="pos-products-grid">
+                                <!-- Populated dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- Right Cart & Terminal Panel -->
+                        <div class="pos-cart-panel">
+                            <!-- Cart Header -->
+                            <div class="pos-cart-header">
+                                <div class="pos-customer-bar">
+                                    <select class="form-select" id="pos-customer-select" style="font-size:0.85rem;">
+                                        <!-- Loaded dynamically -->
+                                    </select>
+                                    <button class="btn btn-secondary btn-sm" onclick="Customers.openAddModal()" title="Add Customer">
+                                        + New
+                                    </button>
+                                </div>
+                                <div id="pos-customer-ledger-info"></div>
+
+                                <!-- Retail vs Wholesale Mode Switch -->
+                                <div class="pos-mode-toggle">
+                                    <button class="mode-btn active" id="mode-retail-btn">Retail Price</button>
+                                    <button class="mode-btn" id="mode-wholesale-btn">Wholesale B2B</button>
+                                </div>
+                            </div>
+
+                            <!-- Cart Items List -->
+                            <div class="pos-cart-items" id="pos-cart-items-container">
+                                <!-- Populated dynamically -->
+                            </div>
+
+                            <!-- Checkout Summary & Action -->
+                            <div class="pos-checkout-section">
+                                <div class="summary-row">
+                                    <span>Gross Subtotal:</span>
+                                    <span id="pos-summary-subtotal">₹0.00</span>
+                                </div>
+                                <div class="summary-row" style="color:#059669;">
+                                    <span>Line Discounts:</span>
+                                    <span id="pos-summary-discount">-₹0.00</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Taxable Turnover:</span>
+                                    <span id="pos-summary-taxable">₹0.00</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>GST Breakdown:</span>
+                                    <span id="pos-summary-taxes">₹0.00</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span>Round-Off:</span>
+                                    <span id="pos-summary-roundoff">₹0.00</span>
+                                </div>
+                                <div class="summary-row total-row">
+                                    <span>Grand Total:</span>
+                                    <span id="pos-summary-grandtotal">₹0.00</span>
+                                </div>
+
+                                <!-- Payment Method Selector -->
+                                <div class="pos-pay-methods">
+                                    <button class="pay-btn active" data-method="CASH">💵 Cash</button>
+                                    <button class="pay-btn" data-method="UPI">📱 UPI / QR</button>
+                                    <button class="pay-btn" data-method="CARD">💳 Card</button>
+                                    <button class="pay-btn" data-method="CREDIT">📜 Khata</button>
+                                </div>
+
+                                <!-- Tendered Amount Input -->
+                                <div style="display:flex; align-items:center; gap:8px; margin-top:2px;">
+                                    <span style="font-size:0.75rem; font-weight:600; color:#64748b; white-space:nowrap;">Tendered: ₹</span>
+                                    <input type="number" id="pos-tendered-amount" class="form-input" style="padding:4px 8px; font-weight:700; height:32px;" placeholder="Amount Received">
+                                    <button class="btn btn-secondary btn-sm" id="btn-clear-cart" title="Clear Cart">Clear</button>
+                                </div>
+
+                                <!-- Checkout Button -->
+                                <button class="btn-checkout" id="btn-pos-checkout">
+                                    <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/></svg>
+                                    <span>Complete Bill & Print (F8)</span>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================================
+                     3. INVENTORY & ROLL MANAGEMENT VIEW
+                     ============================================================ -->
+                <section class="view-section" id="view-inventory">
+                    <!-- Sub-tabs -->
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:18px;">
+                        <div style="display:flex; gap:8px;">
+                            <button class="btn btn-secondary inv-sub-tab active" data-tab="catalog">📦 Fabrics & Products</button>
+                            <button class="btn btn-secondary inv-sub-tab" data-tab="rolls">🌀 Roll Rack Inspector</button>
+                            <button class="btn btn-secondary inv-sub-tab" data-tab="transactions">📋 Audit Movement Log</button>
+                        </div>
+                        <button class="btn btn-primary" onclick="Inventory.openAddModal()">
+                            + Add New Fabric
+                        </button>
+                    </div>
+
+                    <!-- 1. Catalog Tab -->
+                    <div id="inv-catalog-view">
+                        <div class="toolbar">
+                            <div class="toolbar-left">
+                                <div class="search-input-wrap">
+                                    <svg class="search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+                                    <input type="text" id="inv-search-input" class="form-input" placeholder="Search by SKU, fabric, name...">
+                                </div>
+                                <select id="inv-filter-category" class="form-select" style="width:180px;"></select>
+                                <select id="inv-filter-status" class="form-select" style="width:160px;">
+                                    <option value="">All Stock Status</option>
+                                    <option value="OPTIMAL">Optimal Stock</option>
+                                    <option value="LOW_STOCK">Low Stock Warning</option>
+                                    <option value="OUT_OF_STOCK">Out of Stock</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>SKU / Barcode</th>
+                                        <th>Fabric / Product Name</th>
+                                        <th>Category</th>
+                                        <th>Material Composition</th>
+                                        <th>Cost (₹)</th>
+                                        <th>Retail (₹)</th>
+                                        <th>Stock</th>
+                                        <th>Status</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="inv-products-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 2. Rolls Inspector Tab -->
+                    <div id="inv-rolls-view" style="display:none;">
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Roll Number</th>
+                                        <th>Product / Material</th>
+                                        <th>Rack Location</th>
+                                        <th>Initial</th>
+                                        <th>Remaining</th>
+                                        <th>Status</th>
+                                        <th>Age & Cycle</th>
+                                        <th>Tied Capital</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="inv-rolls-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- 3. Audit Transactions Tab -->
+                    <div id="inv-transactions-view" style="display:none;">
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Timestamp</th>
+                                        <th>Product</th>
+                                        <th>Type</th>
+                                        <th>Reference #</th>
+                                        <th>Qty Change</th>
+                                        <th>Stock After</th>
+                                        <th>Remarks</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="inv-transactions-tbody"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- ============================================================
+                     4. BILLING & INVOICES HISTORY VIEW
+                     ============================================================ -->
+                <section class="view-section" id="view-billing">
+                    <div class="toolbar">
+                        <div class="toolbar-left">
+                            <div class="search-input-wrap">
+                                <svg class="search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+                                <input type="text" id="bill-search-input" class="form-input" placeholder="Search invoice #, customer...">
+                            </div>
+                            <select id="bill-filter-status" class="form-select" style="width:160px;">
+                                <option value="">All Payment Status</option>
+                                <option value="PAID">Paid</option>
+                                <option value="PARTIAL">Partial Due</option>
+                                <option value="UNPAID">Unpaid</option>
+                                <option value="VOID">Voided</option>
+                            </select>
+                            <select id="bill-filter-method" class="form-select" style="width:150px;">
+                                <option value="">All Methods</option>
+                                <option value="CASH">Cash</option>
+                                <option value="UPI">UPI</option>
+                                <option value="CARD">Card</option>
+                                <option value="CREDIT">Khata Credit</option>
+                            </select>
+                        </div>
+                        <div class="toolbar-right">
+                            <button class="btn btn-primary" onclick="App.navigateTo('pos')">+ New Bill</button>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Invoice #</th>
+                                    <th>Date</th>
+                                    <th>Customer</th>
+                                    <th>Type</th>
+                                    <th>Total (₹)</th>
+                                    <th>Paid</th>
+                                    <th>Due</th>
+                                    <th>Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="billing-invoices-tbody"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- ============================================================
+                     5. CUSTOMERS & KHATA LEDGER VIEW
+                     ============================================================ -->
+                <section class="view-section" id="view-customers">
+                    <div class="toolbar">
+                        <div class="toolbar-left">
+                            <div class="search-input-wrap">
+                                <svg class="search-icon" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"/></svg>
+                                <input type="text" id="cust-search-input" class="form-input" placeholder="Search customer, phone, code...">
+                            </div>
+                            <select id="cust-filter-type" class="form-select" style="width:160px;">
+                                <option value="">All Customer Types</option>
+                                <option value="RETAIL">Retail</option>
+                                <option value="WHOLESALE">Wholesale</option>
+                                <option value="BOUTIQUE">Boutique</option>
+                            </select>
+                        </div>
+                        <div class="toolbar-right">
+                            <button class="btn btn-primary" onclick="Customers.openAddModal()">+ Add Customer</button>
+                        </div>
+                    </div>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Name</th>
+                                    <th>Phone</th>
+                                    <th>Type</th>
+                                    <th>Credit Limit</th>
+                                    <th>Khata Balance (Due)</th>
+                                    <th>Total Purchases</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="customers-tbody"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- ============================================================
+                     6. SUPPLIERS & STOCK INWARD VIEW
+                     ============================================================ -->
+                <section class="view-section" id="view-suppliers">
+                    <div class="toolbar">
+                        <div class="toolbar-left">
+                            <div class="card-title">Textile Mills & Weavers Directory</div>
+                        </div>
+                        <div class="toolbar-right">
+                            <button class="btn btn-secondary" onclick="Suppliers.openAddSupplierModal()">+ Add Supplier</button>
+                            <button class="btn btn-primary" onclick="Suppliers.openInwardModal()">📥 Inward Stock (GRN)</button>
+                        </div>
+                    </div>
+
+                    <div class="table-container" style="margin-bottom:28px;">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Code</th>
+                                    <th>Mill / Supplier</th>
+                                    <th>Phone</th>
+                                    <th>GSTIN</th>
+                                    <th>Location</th>
+                                    <th>Payable (₹)</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody id="suppliers-tbody"></tbody>
+                        </table>
+                    </div>
+
+                    <div class="card-title" style="margin-bottom:12px;">Recent Goods Received Notes (GRN Purchases)</div>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>GRN Number</th>
+                                    <th>Date</th>
+                                    <th>Supplier</th>
+                                    <th>Supplier Bill #</th>
+                                    <th>Amount (₹)</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody id="purchases-tbody"></tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- ============================================================
+                     7. COMPLEX SQL ANALYTICS WORKBENCH VIEW
+                     ============================================================ -->
+                <section class="view-section" id="view-analytics">
+                    <div style="display:grid; grid-template-columns: 320px 1fr; gap: 20px;">
+                        <!-- Left Query Selector -->
+                        <div class="card" style="padding:16px;">
+                            <div class="card-title" style="font-size:0.95rem; margin-bottom:12px;">
+                                <span>Advanced SQL Showcase</span>
+                            </div>
+                            <div style="font-size:0.75rem; color:#64748b; margin-bottom:14px;">
+                                Live executed relational queries highlighting CTEs, window functions, and real-time inventory tracking.
+                            </div>
+                            <div id="analytics-queries-nav" style="display:flex; flex-direction:column;">
+                                <!-- Loaded dynamically -->
+                            </div>
+                        </div>
+
+                        <!-- Right Live Execution Display -->
+                        <div style="display:flex; flex-direction:column; gap:16px;">
+                            <div class="card">
+                                <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px;">
+                                    <div>
+                                        <h2 id="analytics-query-title" style="font-size:1.15rem; font-weight:800;">Query Title</h2>
+                                        <p id="analytics-query-desc" style="font-size:0.85rem; color:#64748b; margin-top:4px;">Description</p>
+                                    </div>
+                                    <div id="analytics-exec-meta" style="font-size:0.8rem; background:#f1f5f9; padding:4px 10px; border-radius:var(--radius-sm); font-family:monospace;">
+                                        ⚡ Execution time: 0 ms
+                                    </div>
+                                </div>
+
+                                <div id="analytics-concepts-badges" style="display:flex; gap:6px; margin-bottom:12px;">
+                                    <!-- Badges -->
+                                </div>
+
+                                <div style="position:relative; margin-bottom:16px;">
+                                    <pre id="analytics-sql-code" style="background:#0f172a; color:#f8fafc; padding:14px; border-radius:var(--radius-md); font-size:0.78rem; font-family:monospace; max-height:180px; overflow-y:auto; line-height:1.4;"></pre>
+                                    <button class="btn btn-secondary btn-sm" id="btn-copy-sql" style="position:absolute; top:8px; right:8px; background:rgba(255,255,255,0.15); color:#fff; border:none;">
+                                        Copy SQL
+                                    </button>
+                                </div>
+
+                                <!-- Live Results Table -->
+                                <div id="analytics-results-table-wrap">
+                                    <!-- Tabular results -->
+                                </div>
+                            </div>
+
+                            <!-- Custom Read-Only SQL Playground -->
+                            <div class="card">
+                                <div class="card-title" style="font-size:0.95rem; margin-bottom:8px;">
+                                    <span>Interactive Read-Only SQL Playground</span>
+                                </div>
+                                <p style="font-size:0.78rem; color:#64748b; margin-bottom:10px;">
+                                    Test custom read-only SQL queries on SQLite database (e.g., <code>SELECT sku, name, current_stock FROM products WHERE current_stock > 50</code>).
+                                </p>
+                                <form id="form-custom-sql">
+                                    <textarea id="custom-sql-input" class="form-input" style="font-family:monospace; font-size:0.82rem; height:70px; margin-bottom:8px;" placeholder="SELECT * FROM v_stock_summary LIMIT 5;"></textarea>
+                                    <div style="display:flex; justify-content:space-between; align-items:center;">
+                                        <span id="custom-sql-meta" style="font-size:0.75rem; color:#64748b;"></span>
+                                        <button type="submit" class="btn btn-primary btn-sm">▶ Execute Query</button>
+                                    </div>
+                                </form>
+                                <div id="custom-sql-results-wrap" style="margin-top:12px;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <!-- ============================================================
+         MODALS & PRINT RECEIPT ENGINE
+         ============================================================ -->
+
+    <!-- 1. Print Tax Invoice Modal -->
+    <dialog class="custom-modal modal-lg" id="modal-print-invoice">
+        <div class="modal-header">
+            <h3 class="modal-title">Tax Invoice Preview</h3>
+            <div style="display:flex; gap:8px;">
+                <button class="btn btn-secondary btn-sm" onclick="App.printCurrentBill('A4')">🖨️ Print A4 Invoice</button>
+                <button class="btn btn-secondary btn-sm" onclick="App.printCurrentBill('thermal')">🧾 Print 80mm Slip</button>
+                <button class="btn btn-secondary btn-sm btn-close-modal">✕ Close</button>
+            </div>
+        </div>
+        <div class="modal-body printable-area" id="printable-invoice-content">
+            <!-- Rendered by POS.openInvoicePrintPreview -->
+        </div>
+    </dialog>
+
+    <!-- 2. Add / Edit Product Modal -->
+    <dialog class="custom-modal" id="modal-add-product">
+        <div class="modal-header">
+            <h3 class="modal-title" id="modal-product-title">Add Fabric / Product</h3>
+            <button class="btn btn-secondary btn-sm btn-close-modal">✕</button>
+        </div>
+        <form id="form-add-product">
+            <div class="modal-body">
+                <input type="hidden" id="modal-prod-id">
+                <div class="form-group">
+                    <label class="form-label">Product / Fabric Name *</label>
+                    <input type="text" id="modal-prod-name" class="form-input" required placeholder="e.g. Supima Cotton Cambric 60s">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Category *</label>
+                        <select id="modal-prod-category" class="form-select" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Fabric Type *</label>
+                        <select id="modal-prod-fabric" class="form-select" required></select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Unit of Measure (UOM) *</label>
+                        <select id="modal-prod-uom" class="form-select" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">HSN Code *</label>
+                        <input type="text" id="modal-prod-hsn" class="form-input" required value="5208">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">GST Rate % *</label>
+                        <input type="number" id="modal-prod-tax" class="form-input" required value="5.0" step="0.5">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Cost Price (₹) *</label>
+                        <input type="number" id="modal-prod-cost" class="form-input" required step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Retail Selling Price (₹) *</label>
+                        <input type="number" id="modal-prod-retail" class="form-input" required step="0.1">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Wholesale Price (₹)</label>
+                        <input type="number" id="modal-prod-wholesale" class="form-input" step="0.1">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Color / Shade</label>
+                        <input type="text" id="modal-prod-color" class="form-input" placeholder="e.g. Royal Navy">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Pattern / Weave</label>
+                        <input type="text" id="modal-prod-pattern" class="form-input" placeholder="e.g. Plain Solid">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Low Stock Threshold</label>
+                        <input type="number" id="modal-prod-min-stock" class="form-input" value="10">
+                    </div>
+                </div>
+
+                <!-- Initial Roll Section (Only for new) -->
+                <div id="modal-initial-roll-section" style="background:#f8fafc; border:1px solid #e2e8f0; padding:12px; border-radius:var(--radius-md); margin-top:8px;">
+                    <div style="font-size:0.8rem; font-weight:700; color:#475569; margin-bottom:8px;">Initial Stock Roll (Optional)</div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Roll Number</label>
+                            <input type="text" id="modal-prod-roll-number" class="form-input" placeholder="e.g. ROL-COT-99">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Initial Length (Meters)</label>
+                            <input type="number" id="modal-prod-roll-length" class="form-input" placeholder="e.g. 50">
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Rack Location</label>
+                            <input type="text" id="modal-prod-roll-rack" class="form-input" placeholder="e.g. Rack A-1">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-close-modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save Product</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- 3. Stock Adjustment Modal -->
+    <dialog class="custom-modal" id="modal-stock-adjustment">
+        <div class="modal-header">
+            <h3 class="modal-title">Inventory Stock Adjustment</h3>
+            <button class="btn btn-secondary btn-sm btn-close-modal">✕</button>
+        </div>
+        <form id="form-stock-adjustment">
+            <div class="modal-body">
+                <input type="hidden" id="adj-prod-id">
+                <div style="background:#f1f5f9; padding:10px 14px; border-radius:var(--radius-md); font-weight:700; margin-bottom:14px;" id="adj-prod-name-display"></div>
+                <div class="form-group">
+                    <label class="form-label">Adjustment Type</label>
+                    <select id="adj-type" class="form-select">
+                        <option value="ADJUSTMENT">Stock Audit Correction</option>
+                        <option value="DAMAGE">Fabric Defect / Damage Deduction</option>
+                        <option value="RETURN">Customer Return Addition</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Quantity Change (+ to add, - to deduct) *</label>
+                    <input type="number" id="adj-qty" class="form-input" step="0.25" required placeholder="e.g. -5.5 or +10">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Remarks / Audit Justification</label>
+                    <input type="text" id="adj-remarks" class="form-input" placeholder="e.g. Shrinkage during measurement inspection">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-close-modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Apply Stock Change</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- 4. Add Customer Modal -->
+    <dialog class="custom-modal" id="modal-add-customer">
+        <div class="modal-header">
+            <h3 class="modal-title">Add New Customer</h3>
+            <button class="btn btn-secondary btn-sm btn-close-modal">✕</button>
+        </div>
+        <form id="form-add-customer">
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Customer Name *</label>
+                        <input type="text" id="modal-cust-name" class="form-input" required placeholder="e.g. Shalini Couture">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Type</label>
+                        <select id="modal-cust-type" class="form-select">
+                            <option value="RETAIL">Retail Walk-in</option>
+                            <option value="BOUTIQUE">Boutique / Tailor</option>
+                            <option value="WHOLESALE">Wholesale B2B</option>
+                            <option value="INSTITUTIONAL">Institutional</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Phone Number *</label>
+                        <input type="tel" id="modal-cust-phone" class="form-input" required placeholder="+91 98000 00000">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" id="modal-cust-email" class="form-input">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">GSTIN (Optional)</label>
+                        <input type="text" id="modal-cust-gstin" class="form-input" placeholder="GST Identification">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Khata Credit Limit (₹)</label>
+                        <input type="number" id="modal-cust-credit" class="form-input" value="10000">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Address</label>
+                    <input type="text" id="modal-cust-address" class="form-input" placeholder="Shop / House details">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">City</label>
+                    <input type="text" id="modal-cust-city" class="form-input" placeholder="City">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-close-modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Create Customer</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- 5. Customer Ledger Modal -->
+    <dialog class="custom-modal modal-lg" id="modal-customer-ledger">
+        <div class="modal-header">
+            <h3 class="modal-title" id="ledger-customer-title">Customer Ledger</h3>
+            <button class="btn btn-secondary btn-sm btn-close-modal">✕</button>
+        </div>
+        <div class="modal-body">
+            <div style="display:flex; gap:20px; margin-bottom:18px;">
+                <div style="background:#fff1f2; padding:12px; border-radius:var(--radius-md); flex:1;">
+                    <div style="font-size:0.75rem; color:#9f1239; font-weight:700;">OUTSTANDING BALANCE</div>
+                    <div style="font-size:1.4rem; font-weight:800; color:#e11d48;" id="ledger-balance-display">₹0.00</div>
+                </div>
+                <div style="background:#f0fdf4; padding:12px; border-radius:var(--radius-md); flex:1;">
+                    <div style="font-size:0.75rem; color:#166534; font-weight:700;">TOTAL PURCHASES</div>
+                    <div style="font-size:1.4rem; font-weight:800; color:#059669;" id="ledger-purchases-display">₹0.00</div>
+                </div>
+            </div>
+
+            <div style="font-weight:700; margin-bottom:8px;">Invoice Purchase History</div>
+            <div class="table-container" style="max-height:180px; overflow-y:auto; margin-bottom:16px;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Invoice #</th>
+                            <th>Date</th>
+                            <th>Total</th>
+                            <th>Paid</th>
+                            <th>Balance</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ledger-invoices-tbody"></tbody>
+                </table>
+            </div>
+
+            <div style="font-weight:700; margin-bottom:8px;">Payment Receipts (Settlements)</div>
+            <div class="table-container" style="max-height:180px; overflow-y:auto;">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Receipt #</th>
+                            <th>Date</th>
+                            <th>Amount</th>
+                            <th>Method</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody id="ledger-payments-tbody"></tbody>
+                </table>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <button class="btn btn-secondary btn-close-modal">Close</button>
+        </div>
+    </dialog>
+
+    <!-- 6. Record Payment Modal -->
+    <dialog class="custom-modal" id="modal-record-payment">
+        <div class="modal-header">
+            <h3 class="modal-title">Record Khata Credit Settlement</h3>
+            <button class="btn btn-secondary btn-sm btn-close-modal">✕</button>
+        </div>
+        <form id="form-record-customer-payment">
+            <div class="modal-body">
+                <input type="hidden" id="pay-cust-id">
+                <div style="background:#f1f5f9; padding:10px 14px; border-radius:var(--radius-md); font-weight:700; margin-bottom:14px;" id="pay-cust-name-display"></div>
+                <div class="form-group">
+                    <label class="form-label">Settlement Amount (₹) *</label>
+                    <input type="number" id="pay-amount" class="form-input" required step="0.1">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Payment Method</label>
+                    <select id="pay-method" class="form-select">
+                        <option value="CASH">Cash</option>
+                        <option value="UPI">UPI / GPay / PhonePe</option>
+                        <option value="BANK_TRANSFER">Bank NEFT / RTGS</option>
+                        <option value="CHEQUE">Cheque</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Reference / Transaction Number</label>
+                    <input type="text" id="pay-ref" class="form-input" placeholder="UPI ref, Cheque #, etc.">
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Notes</label>
+                    <input type="text" id="pay-notes" class="form-input" value="Khata balance settlement">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-close-modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Generate Receipt & Settle</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- 7. Add Supplier Modal -->
+    <dialog class="custom-modal" id="modal-add-supplier">
+        <div class="modal-header">
+            <h3 class="modal-title">Add Fabric Mill / Supplier</h3>
+            <button class="btn btn-secondary btn-sm btn-close-modal">✕</button>
+        </div>
+        <form id="form-add-supplier">
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="form-label">Company / Mill Name *</label>
+                    <input type="text" id="modal-sup-company" class="form-input" required placeholder="e.g. Vardhman Textiles Ltd">
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Contact Person</label>
+                        <input type="text" id="modal-sup-contact" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone *</label>
+                        <input type="tel" id="modal-sup-phone" class="form-input" required>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Email</label>
+                        <input type="email" id="modal-sup-email" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">GSTIN</label>
+                        <input type="text" id="modal-sup-gstin" class="form-input">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">City</label>
+                        <input type="text" id="modal-sup-city" class="form-input">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">State</label>
+                        <input type="text" id="modal-sup-state" class="form-input">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Address</label>
+                    <input type="text" id="modal-sup-address" class="form-input">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-close-modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Save Supplier</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- 8. Stock Inward (GRN) Modal -->
+    <dialog class="custom-modal" id="modal-stock-inward">
+        <div class="modal-header">
+            <h3 class="modal-title">Inward Fabric Stock (GRN Receipt)</h3>
+            <button class="btn btn-secondary btn-sm btn-close-modal">✕</button>
+        </div>
+        <form id="form-stock-inward">
+            <div class="modal-body">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Supplier / Mill *</label>
+                        <select id="grn-supplier-select" class="form-select" required></select>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Supplier Invoice #</label>
+                        <input type="text" id="grn-inv-no" class="form-input" placeholder="e.g. MILL-9921">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-label">Product / Fabric *</label>
+                    <select id="grn-product-select" class="form-select" required></select>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Inward Quantity (Meters) *</label>
+                        <input type="number" id="grn-quantity" class="form-input" required step="0.5">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Unit Cost Price (₹) *</label>
+                        <input type="number" id="grn-unit-cost" class="form-input" required step="0.1">
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">New Roll Number</label>
+                        <input type="text" id="grn-roll-number" class="form-input" placeholder="e.g. ROL-2026-X1">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Warehouse Rack</label>
+                        <input type="text" id="grn-rack" class="form-input" placeholder="e.g. Rack A-4">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary btn-close-modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Receive & Update Stock</button>
+            </div>
+        </form>
+    </dialog>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container"></div>
+
+    <!-- Application JavaScript Modules -->
+    <script src="js/api.js"></script>
+    <script src="js/dashboard.js"></script>
+    <script src="js/pos.js"></script>
+    <script src="js/inventory.js"></script>
+    <script src="js/billing.js"></script>
+    <script src="js/customers.js"></script>
+    <script src="js/suppliers.js"></script>
+    <script src="js/analytics.js"></script>
+    <script src="js/app.js"></script>
+</body>
+</html>
