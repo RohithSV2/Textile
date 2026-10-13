@@ -255,6 +255,52 @@ const analyticsController = {
         } catch (error) {
             res.status(400).json({ success: false, message: 'SQL Execution Error: ' + error.message });
         }
+    },
+
+    /**
+     * CSV Data Exporter (Products, Customers, Invoices, Rolls)
+     */
+    exportCsv: async (req, res) => {
+        try {
+            const { type } = req.params;
+            let query = '';
+            const filename = `textile_${type}_${Date.now()}.csv`;
+
+            if (type === 'products') {
+                query = `SELECT sku, barcode, name, current_stock, cost_price, selling_price, wholesale_price, tax_rate, hsn_code FROM products WHERE is_active = 1`;
+            } else if (type === 'customers') {
+                query = `SELECT customer_code, name, customer_type, phone, email, gstin, credit_limit, current_balance, total_purchases FROM customers`;
+            } else if (type === 'invoices') {
+                query = `SELECT invoice_number, invoice_date, customer_name, invoice_type, subtotal, total_discount, total_tax, grand_total, paid_amount, balance_due, payment_status, payment_method FROM v_invoice_details`;
+            } else if (type === 'rolls') {
+                query = `SELECT roll_number, sku, product_name, fabric_name, location_rack, initial_length, current_length, status, age_days, aging_category FROM v_roll_inventory`;
+            } else {
+                return res.status(400).json({ success: false, message: 'Invalid export type' });
+            }
+
+            const rows = await db.all(query);
+            if (rows.length === 0) {
+                return res.status(404).json({ success: false, message: 'No records to export' });
+            }
+
+            const headers = Object.keys(rows[0]);
+            const csvRows = [headers.join(',')];
+
+            for (const row of rows) {
+                const values = headers.map(header => {
+                    const val = row[header] == null ? '' : String(row[header]);
+                    return `"${val.replace(/"/g, '""')}"`;
+                });
+                csvRows.push(values.join(','));
+            }
+
+            res.setHeader('Content-Type', 'text/csv');
+            res.setHeader('Content-Disposition', `attachment; filename="${filename}"`);
+            res.send(csvRows.join('\r\n'));
+        } catch (error) {
+            console.error('Error exporting CSV:', error);
+            res.status(500).json({ success: false, message: 'Export failed: ' + error.message });
+        }
     }
 };
 

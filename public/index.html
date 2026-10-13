@@ -237,6 +237,14 @@
                                     <input type="text" id="pos-search-input" placeholder="Search fabric, SKU, color or scan Barcode (Press F2)..." autofocus>
                                 </div>
                             </div>
+                            <!-- 1-Click Barcode Tester Chips -->
+                            <div style="display:flex; gap:6px; align-items:center; flex-wrap:wrap; font-size:0.75rem; color:#64748b; margin-top:-6px;">
+                                <span style="font-weight:700;">⚡ Scan Barcode:</span>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="POS.handleBarcodeScan('8901001001')">8901001001 (Cotton)</button>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="POS.handleBarcodeScan('8902002001')">8902002001 (Banarasi Silk)</button>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="POS.handleBarcodeScan('8903003001')">8903003001 (Suiting)</button>
+                                <button type="button" class="btn btn-secondary btn-sm" onclick="POS.handleBarcodeScan('8904004001')">8904004001 (Linen)</button>
+                            </div>
 
                             <!-- Category Filter Pills -->
                             <div class="category-pills">
@@ -346,9 +354,12 @@
                             <button class="btn btn-secondary inv-sub-tab" data-tab="rolls">🌀 Roll Rack Inspector</button>
                             <button class="btn btn-secondary inv-sub-tab" data-tab="transactions">📋 Audit Movement Log</button>
                         </div>
-                        <button class="btn btn-primary" onclick="Inventory.openAddModal()">
-                            + Add New Fabric
-                        </button>
+                        <div style="display:flex; gap:8px;">
+                            <a href="/api/analytics/export/products" class="btn btn-secondary" style="text-decoration:none;" download>📥 Export CSV</a>
+                            <button class="btn btn-primary" onclick="Inventory.openAddModal()">
+                                + Add New Fabric
+                            </button>
+                        </div>
                     </div>
 
                     <!-- 1. Catalog Tab -->
@@ -457,6 +468,7 @@
                             </select>
                         </div>
                         <div class="toolbar-right">
+                            <a href="/api/analytics/export/invoices" class="btn btn-secondary btn-sm" style="text-decoration:none;" download>📥 Export CSV</a>
                             <button class="btn btn-primary" onclick="App.navigateTo('pos')">+ New Bill</button>
                         </div>
                     </div>
@@ -499,6 +511,7 @@
                             </select>
                         </div>
                         <div class="toolbar-right">
+                            <a href="/api/analytics/export/customers" class="btn btn-secondary btn-sm" style="text-decoration:none;" download>📥 Export CSV</a>
                             <button class="btn btn-primary" onclick="Customers.openAddModal()">+ Add Customer</button>
                         </div>
                     </div>
